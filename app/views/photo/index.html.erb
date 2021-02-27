@@ -1,0 +1,18 @@
+<body>
+<h1 style="font-size: 30pt;text-align: center;">Photo page</h1>
+
+<p id="p02"><u>Photo of</u> :- <b><i><%= link_to @user.first_name %> <%= link_to @user.last_name %></i></b></p>
+<% @photos.each do |photo| %>
+ <%= image_tag("/assets/#{photo.file_name}") %>
+<p id="p02"><u>Photo created on</u> :- <b><i><%=photo.date_time %> </i></b></p>
+
+  <% @comments.where("photo_id=?",photo.id).each do |comment| %>
+
+    <p id="p01"><b><i> <u>Comment</u> :- <%=comment.comment_text %></i></b></p>
+    <p id="p01"><b><i> <u>Created on</u> :- <%=comment.date_time %></i></b></p>
+    <p id="p01"><b><i> <u>Posted by</u> :- <%=link_to display_name(comment.user_id), user_photos_path(comment.user_id) %></i></b></p>
+  <% end %>
+
+<% end %>
+
+</body>
